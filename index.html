@@ -1,1 +1,158 @@
-index.html
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Interactive visualization of USA house price trends and market analysis">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>USA House Price Trends - Interactive Explorer</title>
+
+    <!-- Load Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700' rel='stylesheet' type='text/css'>
+
+    <!-- CSS libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="main-container">
+
+                <!-- Header -->
+                <h1>🏠 USA House Price Trends</h1>
+                <h2>Explore real estate market dynamics through interactive data visualization</h2>
+
+                <!-- Loading indicator -->
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading house price data...</p>
+                </div>
+
+                <!-- Main content (hidden until loaded) -->
+                <div id="main-content" class="hidden">
+
+                    <!-- Instructions -->
+                    <div class="instructions">
+                        <strong>How to explore:</strong> Hover over charts to see detailed property information •
+                        Adjust filters to analyze specific segments •
+                        Use the timeline brush to zoom into date ranges •
+                        Compare price trends across different property features
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="controls">
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label for="metric-select">View Metric:</label>
+                                <select id="metric-select">
+                                    <option value="price">Average Price</option>
+                                    <option value="price_sqft">Price per Sq Ft</option>
+                                    <option value="count">Sales Volume</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="bedroom-filter">Bedrooms:</label>
+                                <select id="bedroom-filter">
+                                    <option value="all">All</option>
+                                    <option value="1">1 Bedroom</option>
+                                    <option value="2">2 Bedrooms</option>
+                                    <option value="3">3 Bedrooms</option>
+                                    <option value="4">4 Bedrooms</option>
+                                    <option value="5+">5+ Bedrooms</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="waterfront-filter">Waterfront:</label>
+                                <select id="waterfront-filter">
+                                    <option value="all">All Properties</option>
+                                    <option value="1">Waterfront Only</option>
+                                    <option value="0">Non-Waterfront</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="condition-filter">Condition:</label>
+                                <select id="condition-filter">
+                                    <option value="all">All Conditions</option>
+                                    <option value="5">Excellent (5)</option>
+                                    <option value="4">Good (4)</option>
+                                    <option value="3">Average (3)</option>
+                                    <option value="2">Fair (2)</option>
+                                    <option value="1">Poor (1)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label for="sqft-min">Min Sq Ft:</label>
+                                <input type="number" id="sqft-min" placeholder="e.g., 1000" min="0" step="100">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="sqft-max">Max Sq Ft:</label>
+                                <input type="number" id="sqft-max" placeholder="e.g., 5000" min="0" step="100">
+                            </div>
+
+                            <button id="apply-filter-btn">Apply Filters</button>
+                            <button id="reset-filter-btn">Reset All</button>
+                        </div>
+
+                        <!-- Active Filters Display -->
+                        <div class="filter-badges" id="active-filters"></div>
+                    </div>
+
+                    <!-- Main Chart -->
+                    <div class="chart-container">
+                        <div id="main-chart" style="height: 500px; width: 100%"></div>
+                    </div>
+
+                    <!-- Secondary Charts Row -->
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <div class="chart-container">
+                                <div id="scatter-plot" style="height: 400px; width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="chart-container">
+                                <div id="distribution-chart" style="height: 400px; width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Brush -->
+                    <div class="chart-container">
+                        <div id="timeline" style="height: 120px; width: 100%"></div>
+                    </div>
+
+                    <!-- Data Source -->
+                    <div class="data-source">
+                        <p><strong>Data Source:</strong> USA Real Estate Market Database<br>
+                            Comprehensive property sales data including price, features, location, and transaction dates</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load JS libraries -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<!-- d3 -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<!-- Main visualization script -->
+<script src="main.js"></script>
+
+</body>
+</html>
